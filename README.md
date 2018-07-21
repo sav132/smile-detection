@@ -3,7 +3,8 @@
 ## Instructions
 
 ### Run real-time smile detection:
-> cd src 
+> cd src
+   
 > python3 video_emotion_color_demo.py
 
 
