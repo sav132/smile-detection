@@ -1,5 +1,5 @@
 from statistics import mode
-from face import overlay_img_above_facial_frame
+
 import cv2
 from keras.models import load_model
 import numpy as np
@@ -16,8 +16,7 @@ from utils.preprocessor import preprocess_input
 detection_model_path = '../trained_models/detection_models/haarcascade_frontalface_default.xml'
 emotion_model_path = '../trained_models/emotion_models/fer2013_mini_XCEPTION.102-0.66.hdf5'
 emotion_labels = get_labels('fer2013')
-IMAGE_PATH = 'happ.png'
-hat = cv2.imread(IMAGE_PATH, -1)
+
 # hyper-parameters for bounding boxes shape
 frame_window = 10
 emotion_offsets = (20, 40)
@@ -41,9 +40,6 @@ while True:
     faces = detect_faces(face_detection, gray_image)
     #l_img = cv2.imread(rgb_image)
     #s_img = cv2.imread("bean.jpg")
-
-
-
     for face_coordinates in faces:
 
         x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
@@ -67,6 +63,7 @@ while True:
             emotion_text = emotion_labels[emotion_label_arg]
             print(emotion_text)
             emotion_window.append(emotion_text)
+
             if len(emotion_window) > frame_window:
                 emotion_window.pop(0)
             try:
@@ -95,8 +92,6 @@ while True:
                                       color, 0, -45, 1, 1)
                             #print("emotion probability" , emotion_probability)
                             print("you are HAPPY !!!!!!!!")
-                            frameo = overlay_img_above_facial_frame(rgb_image, x1, x2, y1, y2, hat)
-
                             #cv2.imshow('dst_rt', l_img)
                             print(area)
                             break
